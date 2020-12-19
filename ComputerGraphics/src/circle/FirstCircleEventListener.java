@@ -32,7 +32,7 @@ public class FirstCircleEventListener implements GLEventListener
         gl.glPointSize(5.0f);
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         gl.glColor3f(red, green, blue);
-        gl.glBegin(GL.GL_POLYGON);
+        gl.glBegin(GL.GL_POINTS);
 // angle is
 // x = radius * (cosine of angle)
 // y = radius * (sine of angle)

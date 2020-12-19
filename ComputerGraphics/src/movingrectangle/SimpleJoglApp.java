@@ -1,6 +1,4 @@
-package circle;
-
-import line.SecondGLEventListener;
+package movingrectangle;
 
 import javax.media.opengl.GLCanvas;
 import javax.swing.*;
@@ -17,7 +15,7 @@ public class SimpleJoglApp extends JFrame {
      */
 
     static GLCanvas glcanvas = null;
-
+MovingRectangle kd=new MovingRectangle();
 
     public static void main(String[] args) {
         final SimpleJoglApp app = new SimpleJoglApp();
@@ -45,7 +43,14 @@ public class SimpleJoglApp extends JFrame {
          * glcanvas.addGLEventListener(new circle.FirstCircleEventListener());
          * *
          */
-        glcanvas.addGLEventListener(new FirstCircleEventListener());
+        glcanvas = new GLCanvas();
+        glcanvas.addGLEventListener(kd);
+        glcanvas.addMouseListener(kd);
+        glcanvas.addMouseMotionListener(kd);
+        glcanvas.addKeyListener(kd);
+        glcanvas.addGLEventListener(kd);
+        kd.setGlc(glcanvas);
+
 
         add(glcanvas, BorderLayout.CENTER);
         setSize(500, 300);

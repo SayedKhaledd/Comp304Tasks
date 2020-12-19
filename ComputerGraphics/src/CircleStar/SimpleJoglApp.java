@@ -1,10 +1,10 @@
-package circle;
-
-import line.SecondGLEventListener;
+package CircleStar;
 
 import javax.media.opengl.GLCanvas;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This is a basic JOGL app. Feel free to
@@ -19,6 +19,7 @@ public class SimpleJoglApp extends JFrame {
     static GLCanvas glcanvas = null;
 
 
+CircleStar circleStar =new CircleStar();
     public static void main(String[] args) {
         final SimpleJoglApp app = new SimpleJoglApp();
 
@@ -39,14 +40,18 @@ public class SimpleJoglApp extends JFrame {
         //kill the process when the JFrame is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //only three JOGL lines of code ... and here they are
+
         glcanvas = new GLCanvas();
         /**Circle program
          *
          * glcanvas.addGLEventListener(new circle.FirstCircleEventListener());
          * *
          */
-        glcanvas.addGLEventListener(new FirstCircleEventListener());
+        circleStar.setGlc(glcanvas);
 
+        glcanvas.addGLEventListener(circleStar);
+
+        glcanvas.addMouseMotionListener(circleStar);
         add(glcanvas, BorderLayout.CENTER);
         setSize(500, 300);
 
@@ -67,7 +72,6 @@ public class SimpleJoglApp extends JFrame {
                 (screenSize.height - frameSize.height) >> 1
         );
     }
-
 
 
 }

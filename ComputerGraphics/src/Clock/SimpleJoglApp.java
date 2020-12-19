@@ -1,10 +1,10 @@
-package circle;
-
-import line.SecondGLEventListener;
+package Clock;
 
 import javax.media.opengl.GLCanvas;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This is a basic JOGL app. Feel free to
@@ -17,8 +17,10 @@ public class SimpleJoglApp extends JFrame {
      */
 
     static GLCanvas glcanvas = null;
+    JButton clockwise = new JButton("Clockwise");
+    JButton anticlockwise = new JButton("Anticlockwise");
 
-
+Clock clock=new Clock();
     public static void main(String[] args) {
         final SimpleJoglApp app = new SimpleJoglApp();
 
@@ -39,14 +41,35 @@ public class SimpleJoglApp extends JFrame {
         //kill the process when the JFrame is closed
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //only three JOGL lines of code ... and here they are
+        JPanel jp = new JPanel();
+        clockwise.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              clock.degree--;
+                glcanvas.repaint();
+            }
+        });
+        anticlockwise.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clock.degree++;
+                glcanvas.repaint();
+            }
+        });
+        jp.add(clockwise);
+        jp.add(anticlockwise);
+
         glcanvas = new GLCanvas();
         /**Circle program
          *
          * glcanvas.addGLEventListener(new circle.FirstCircleEventListener());
          * *
          */
-        glcanvas.addGLEventListener(new FirstCircleEventListener());
+        clock.setGlc(glcanvas);
 
+        glcanvas.addGLEventListener(clock);
+
+        add(jp, BorderLayout.SOUTH);
         add(glcanvas, BorderLayout.CENTER);
         setSize(500, 300);
 
@@ -67,7 +90,6 @@ public class SimpleJoglApp extends JFrame {
                 (screenSize.height - frameSize.height) >> 1
         );
     }
-
 
 
 }
